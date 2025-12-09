@@ -10,7 +10,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 const RECENTS_STORAGE_KEY = 'weather-dashboard-recent-cities'
 
 function App() {
-  const [city, setCity] = useState('London')
+  const [city, setCity] = useState('')
   const [currentWeather, setCurrentWeather] = useState(null)
   const [forecast, setForecast] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -89,11 +89,6 @@ function App() {
       console.error('Failed to save recent cities to storage', err)
     }
   }, [recentCities])
-
-  // Fetch initial weather on mount
-  useEffect(() => {
-    fetchWeather(city)
-  }, [])
 
   return (
     <div className="app">
