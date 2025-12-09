@@ -1,5 +1,9 @@
 import express from 'express';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+// Ensure environment variables from .env are loaded before we read them
+dotenv.config();
 
 const router = express.Router();
 const API_KEY = process.env.OPENWEATHER_API_KEY;

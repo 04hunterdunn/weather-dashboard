@@ -1,22 +1,70 @@
+.search-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .search-bar {
   display: flex;
   gap: 10px;
   margin-bottom: 30px;
   padding: 0 20px;
+  align-items: flex-start;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
 }
 
 .search-input {
-  flex: 1;
+  width: 100%;
   padding: 12px 16px;
   font-size: 16px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #ffffff;
 }
 
 .search-input:focus {
-  border-color: #007bff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  padding: 4px 0;
+  list-style: none;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.search-suggestion {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-suggestion:hover {
+  background-color: #f3f4ff;
+}
+
+.search-suggestion--active {
+  background-color: #e0e4ff;
 }
 
 .search-button {
@@ -29,6 +77,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
 }
 
 .search-button:hover {
@@ -40,13 +89,61 @@
   transform: translateY(0);
 }
 
+.recent-searches {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #555;
+}
+
+.recent-label {
+  font-weight: 600;
+}
+
+.recent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-helper {
+  padding: 0 20px;
+  font-size: 12px;
+  color: #777;
+}
+
+.recent-chip {
+  border-radius: 999px;
+  border: 1px solid #d0d4ff;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #334;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.recent-chip:hover {
+  background: #eef0ff;
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
+}
+
+.recent-chip:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 @media (max-width: 600px) {
   .search-bar {
     flex-direction: column;
     padding: 0 10px;
   }
 
-  .search-input {
+  .search-button {
     width: 100%;
   }
 }
