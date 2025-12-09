@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import CurrentWeather from './components/CurrentWeather'
@@ -44,7 +44,7 @@ function App() {
   }
 
   // Fetch initial weather on mount
-  React.useEffect(() => {
+  useEffect(() => {
     fetchWeather(city)
   }, [])
 
