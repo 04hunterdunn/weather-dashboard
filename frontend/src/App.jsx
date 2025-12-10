@@ -16,14 +16,25 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [recentCities, setRecentCities] = useState([])
+  const [unit, setUnit] = useState('metric')
 
-  const fetchWeather = async (searchCity) => {
+  const fetchWeather = async (searchCity, unitOverride) => {
+    const unitsToUse = unitOverride || unit || 'metric'
+
     setLoading(true)
     setError(null)
     try {
       const [weatherRes, forecastRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/weather/current?city=${searchCity}`),
-        fetch(`${API_BASE_URL}/weather/forecast?city=${searchCity}`)
+        fetch(
+          `${API_BASE_URL}/weather/current?city=${encodeURIComponent(
+            searchCity
+          )}&units=${unitsToUse}`
+        ),
+        fetch(
+          `${API_BASE_URL}/weather/forecast?city=${encodeURIComponent(
+            searchCity
+          )}&units=${unitsToUse}`
+        )
       ])
 
       if (!weatherRes.ok || !forecastRes.ok) {
@@ -52,6 +63,17 @@ function App() {
       setForecast(null)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleSearch = (searchCity) => {
+    fetchWeather(searchCity, unit)
+  }
+
+  const handleUnitChange = (newUnit) => {
+    setUnit(newUnit)
+    if (city) {
+      fetchWeather(city, newUnit)
     }
   }
 
@@ -98,10 +120,32 @@ function App() {
       </header>
 
       <main className="app-main">
+        <div className="unit-toggle">
+          <span className="unit-toggle-label">Units:</span>
+          <button
+            type="button"
+            className={`unit-toggle-button${
+              unit === 'metric' ? ' unit-toggle-button--active' : ''
+            }`}
+            onClick={() => handleUnitChange('metric')}
+          >
+            °C
+          </button>
+          <button
+            type="button"
+            className={`unit-toggle-button${
+              unit === 'imperial' ? ' unit-toggle-button--active' : ''
+            }`}
+            onClick={() => handleUnitChange('imperial')}
+          >
+            °F
+          </button>
+        </div>
+
         <SearchBar
-          onSearch={fetchWeather}
+          onSearch={handleSearch}
           recentCities={recentCities}
-          onRecentClick={fetchWeather}
+          onRecentClick={handleSearch}
         />
 
         {error && <ErrorMessage message={error} />}
@@ -109,8 +153,8 @@ function App() {
 
         {currentWeather && !loading && (
           <>
-            <CurrentWeather weather={currentWeather} />
-            {forecast && <Forecast forecast={forecast} />}
+            <CurrentWeather weather={currentWeather} unit={unit} />
+            {forecast && <Forecast forecast={forecast} unit={unit} />}
           </>
         )}
 

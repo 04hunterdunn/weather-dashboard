@@ -36,6 +36,46 @@
   gap: 20px;
 }
 
+.unit-toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.unit-toggle-label {
+  font-size: 14px;
+  color: #444;
+}
+
+.unit-toggle-button {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(102, 126, 234, 0.4);
+  background: #ffffff;
+  color: #334;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.unit-toggle-button--active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+}
+
+.unit-toggle-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(102, 126, 234, 0.35);
+}
+
+.unit-toggle-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 .welcome-message {
   text-align: center;
   padding: 60px 20px;

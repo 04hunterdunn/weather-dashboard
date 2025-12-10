@@ -1,6 +1,8 @@
 import './Forecast.css'
 
-export default function Forecast({ forecast }) {
+export default function Forecast({ forecast, unit = 'metric' }) {
+  const unitLabel = unit === 'imperial' ? '°F' : '°C'
+  const windLabel = unit === 'imperial' ? 'mph' : 'm/s'
   const getWeatherEmoji = (icon) => {
     const emojiMap = {
       '01d': '☀️', '01n': '🌙',
@@ -28,9 +30,14 @@ export default function Forecast({ forecast }) {
                 <div key={idx} className="forecast-hour">
                   <p className="hour-time">{hour.time}</p>
                   <span className="hour-emoji">{getWeatherEmoji(hour.icon)}</span>
-                  <p className="hour-temp">{Math.round(hour.temperature)}°C</p>
+                  <p className="hour-temp">
+                    {Math.round(hour.temperature)}
+                    {unitLabel}
+                  </p>
                   <p className="hour-desc">{hour.description}</p>
-                  <p className="hour-wind">💨 {hour.windSpeed} m/s</p>
+                  <p className="hour-wind">
+                    💨 {hour.windSpeed} {windLabel}
+                  </p>
                 </div>
               ))}
             </div>

@@ -1,6 +1,8 @@
 import './CurrentWeather.css'
 
-export default function CurrentWeather({ weather }) {
+export default function CurrentWeather({ weather, unit = 'metric' }) {
+  const unitLabel = unit === 'imperial' ? '°F' : '°C'
+  const windLabel = unit === 'imperial' ? 'mph' : 'm/s'
   const getWeatherEmoji = (icon) => {
     const emojiMap = {
       '01d': '☀️', '01n': '🌙',
@@ -29,8 +31,14 @@ export default function CurrentWeather({ weather }) {
         <div className="temperature-section">
           <span className="emoji">{getWeatherEmoji(weather.icon)}</span>
           <div className="temp-info">
-            <span className="temperature">{Math.round(weather.temperature)}°C</span>
-            <span className="feels-like">Feels like {Math.round(weather.feelsLike)}°C</span>
+            <span className="temperature">
+              {Math.round(weather.temperature)}
+              {unitLabel}
+            </span>
+            <span className="feels-like">
+              Feels like {Math.round(weather.feelsLike)}
+              {unitLabel}
+            </span>
           </div>
         </div>
 
@@ -50,7 +58,9 @@ export default function CurrentWeather({ weather }) {
           <span className="detail-icon">💨</span>
           <div className="detail-info">
             <p className="detail-label">Wind Speed</p>
-            <p className="detail-value">{weather.windSpeed} m/s</p>
+            <p className="detail-value">
+              {weather.windSpeed} {windLabel}
+            </p>
           </div>
         </div>
 

@@ -16,7 +16,7 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5';
  */
 router.get('/current', async (req, res) => {
   try {
-    const { city } = req.query;
+    const { city, units } = req.query;
 
     if (!city) {
       return res.status(400).json({ error: 'City parameter is required' });
@@ -26,11 +26,13 @@ router.get('/current', async (req, res) => {
       return res.status(500).json({ error: 'API key not configured' });
     }
 
+    const unit = units === 'imperial' ? 'imperial' : 'metric';
+
     const response = await axios.get(`${BASE_URL}/weather`, {
       params: {
         q: city,
         appid: API_KEY,
-        units: 'metric' // Use Celsius
+        units: unit
       }
     });
 
@@ -66,7 +68,7 @@ router.get('/current', async (req, res) => {
  */
 router.get('/forecast', async (req, res) => {
   try {
-    const { city } = req.query;
+    const { city, units } = req.query;
 
     if (!city) {
       return res.status(400).json({ error: 'City parameter is required' });
@@ -76,11 +78,13 @@ router.get('/forecast', async (req, res) => {
       return res.status(500).json({ error: 'API key not configured' });
     }
 
+    const unit = units === 'imperial' ? 'imperial' : 'metric';
+
     const response = await axios.get(`${BASE_URL}/forecast`, {
       params: {
         q: city,
         appid: API_KEY,
-        units: 'metric'
+        units: unit
       }
     });
 
