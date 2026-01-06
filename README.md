@@ -218,7 +218,3 @@ You can deploy the backend to Render, Railway, or any Node‑compatible host:
 ## Contributing
 
 Feel free to fork this repo, open issues, or submit pull requests.
-
-## License
-
-MIT
