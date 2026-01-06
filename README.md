@@ -189,20 +189,25 @@ This starts:
 1. Push the repo to GitHub.
 2. Import the project into Vercel and set the root to `frontend` (if needed).
 3. In **Project Settings → Environment Variables**, set:
-   - `VITE_API_URL=https://your-backend-host.com/api`
+   - `VITE_API_URL=https://weather-dashboard-backend-jj2b.onrender.com/api`
 4. Deploy – Vercel builds the Vite app and serves it from a URL like
    `https://weather-dashboard-frontend-uvxd.vercel.app/`.
 
-### Backend
+### Backend (Render)
 
-You can deploy the backend to Render, Railway, or any Node‑compatible host:
+The backend for this project is hosted on **Render** at:
+
+- `https://weather-dashboard-backend-jj2b.onrender.com/`  
+- API base URL: `https://weather-dashboard-backend-jj2b.onrender.com/api`
+
+To deploy or recreate it:
 
 1. Push the repo to GitHub.
-2. Create a new web service from the `backend` directory.
+2. Create a new **Web Service** on Render from the `backend` directory.
 3. Set environment variables: `PORT`, `OPENWEATHER_API_KEY`, `NODE_ENV`,
    `FRONTEND_URL`.
-4. Deploy, then update `VITE_API_URL` (both locally and on Vercel) to point to
-   `https://your-backend-host.com/api`.
+4. Deploy, then ensure `VITE_API_URL` (locally and on Vercel) points to
+   `https://weather-dashboard-backend-jj2b.onrender.com/api`.
 
 ## How It Works
 
